@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Date 🎀</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: linear-gradient(135deg, #fff7ef, #ffdfe6, #f5d6b4);
+      position:relative;
+    }
+
+    .container{
+      width:90%;
+      max-width:650px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-radius:30px;
+      padding:40px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);
+      position:relative;
+      z-index:2;
+      border:3px solid #f6c9d5;
+    }
+
+    h1{
+      color:#8b5e3c;
+      font-size:2.2rem;
+      margin-bottom:15px;
+    }
+
+    p{
+      color:#7b5b45;
+      font-size:1.1rem;
+      margin-bottom:30px;
+    }
+
+    .buttons{
+      position:relative;
+      height:120px;
+    }
+
+    button{
+      border:none;
+      padding:15px 30px;
+      border-radius:20px;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.3s;
+      position:absolute;
+      font-weight:bold;
+    }
+
+    #yesBtn{
+      background:#ffb6c9;
+      color:#fff;
+      left:30%;
+      box-shadow:0 5px 15px rgba(255,182,201,0.5);
+    }
+
+    #yesBtn:hover{
+      transform:scale(1.08);
+    }
+
+    #noBtn{
+      background:#d8b08c;
+      color:white;
+      left:55%;
+      box-shadow:0 5px 15px rgba(216,176,140,0.5);
+    }
+
+    #message{
+      margin-top:25px;
+      font-size:1.2rem;
+      color:#7b4f37;
+      font-weight:bold;
+      min-height:60px;
+      line-height:1.6;
+    }
+
+    /* Sticker dekorasi */
+    .sticker{
+      position:absolute;
+      font-size:2.2rem;
+      opacity:0.9;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .book{ top:30px; left:40px; }
+    .coffee{ top:60px; right:50px; }
+    .pencil{ bottom:50px; left:60px; }
+    .note{ bottom:70px; right:70px; }
+    .love1{ top:150px; left:100px; }
+    .love2{ bottom:130px; right:120px; }
+
+    @keyframes float{
+      0%{ transform:translateY(0px);}
+      50%{ transform:translateY(-10px);}
+      100%{ transform:translateY(0px);}
+    }
+
+    .sparkle{
+      position:absolute;
+      font-size:1.3rem;
+      animation: sparkle 2s linear infinite;
+      opacity:0.8;
+    }
+
+    @keyframes sparkle{
+      0%{
+        transform:translateY(0) scale(1);
+        opacity:0;
+      }
+      50%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-50px) scale(1.5);
+        opacity:0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Sticker -->
+  <div class="sticker book">📚</div>
+  <div class="sticker coffee">☕</div>
+  <div class="sticker pencil">✏️</div>
+  <div class="sticker note">📝</div>
+  <div class="sticker love1">💗</div>
+  <div class="sticker love2">💖</div>
+
+  <div class="container">
+
+    <h1>Study Date 🎀</h1>
+
+    <p>Mau belajar bareng aku? 📖☕</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Mau 🎀</button>
+      <button id="noBtn">Tidak 🙅🏻‍♀️</button>
+    </div>
+
+    <div id="message"></div>
+
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const message = document.getElementById("message");
+
+    // Saat klik tombol mau
+    yesBtn.addEventListener("click", () => {
+      message.innerHTML = `
+        YAYYY 💖📚<br>
+        Semangat belajar yaa!<br>
+        Semoga kita dapat nilai bagus, ranking naik,
+        dan semua usaha kita terbayar ✨☕
+      `;
+
+      createSparkles();
+    });
+
+    // Tombol tidak kabur
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("click", moveButton);
+
+    function moveButton(){
+      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+
+      const teks = [
+        "Yaaaaah 😔",
+        "Ayoo belajar bareng 😭",
+        "Jangan nolak dongg 📚",
+        "Nanti nilai kita bagus loh ✨",
+        "Belajar sambil ngopi ☕💖"
+      ];
+
+      message.innerHTML = teks[Math.floor(Math.random() * teks.length)];
+    }
+
+    // Efek sparkle
+    function createSparkles(){
+      for(let i=0; i<20; i++){
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.innerHTML = "✨";
+
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.top = Math.random() * window.innerHeight + "px";
+
+        sparkle.style.animationDuration = (Math.random() * 2 + 1) + "s";
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+          sparkle.remove();
+        }, 2000);
+      }
+    }
+  </script>
+
+</body>
+</html>
